@@ -1,14 +1,15 @@
 import React from 'react'
 import {Footer, Header} from '../components/layout'
+import {Home} from '../pages'
 
-function App() {
+const App = () => {
   return (
     <div>
       <Header/>
-      Main Component
+      <Home/>
       <Footer/>
     </div>
   )
 }
 
-export default App;
+export default App
