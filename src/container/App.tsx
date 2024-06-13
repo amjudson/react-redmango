@@ -21,7 +21,7 @@ const App = () => {
     if (!isLoading) {
       dispatch(setShoppingCart(data.result?.cartItems))
     }
-  }, [isLoading, data])
+  }, [isLoading, data, dispatch])
 
   return (
     <div>

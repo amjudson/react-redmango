@@ -15,7 +15,7 @@ const MenuItemList = () => {
     if (!isLoading) {
       dispatch(setMenuItem(data.result))
     }
-  }, [isLoading])
+  }, [isLoading, data, dispatch])
 
   if (isLoading) {
     return <MainLoader/>

@@ -16,7 +16,7 @@ const MenuItemCard = (props: MenuItemCardProps) => {
 
   const handleAddToCart = async (menuItemId: number) => {
     setAddingToCart(true)
-    const response = await updateShoppingCart({
+    await updateShoppingCart({
       userId: USER_ID,
       menuItemId: menuItemId,
       updateQuantityBy: 1,
