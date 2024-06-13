@@ -1,5 +1,5 @@
 import React from 'react'
-import {CartSummary} from '../components/page/cart'
+import {CartPickUpDetails, CartSummary} from '../components/page/cart'
 
 const ShoppingCart = () => {
   return (
@@ -8,7 +8,7 @@ const ShoppingCart = () => {
         <CartSummary/>
       </div>
       <div className={'col-lg-6 col-12 p-4'}>
-        User Details
+        <CartPickUpDetails/>
       </div>
     </div>
   )
