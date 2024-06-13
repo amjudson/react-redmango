@@ -1,8 +1,11 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import {useAppSelector} from '../../storage/redux/hooks'
 let logo = require('../../../src/assets/images/mango.png')
 
 const Header = () => {
+  const shoppingCartFromStore = useAppSelector((state) => state.shoppingCart ?? [])
+
   return (
     <div>
       <nav className={'navbar navbar-expand-lg bg-dark navbar-dark'}>
@@ -27,6 +30,9 @@ const Header = () => {
               <li className={'nav-item'}>
                 <NavLink className={'nav-link'} aria-current={'page'} to={'/shoppingCart'}>
                   <i className={'bi bi-cart4'}></i>
+                  {shoppingCartFromStore.cartItems?.length ? (
+                    <span className={'badge bg-success ms-1'}>{`${shoppingCartFromStore.cartItems.length}`}</span>
+                  ) : null}
                 </NavLink>
               </li>
               <li className={'nav-item dropdown'}>

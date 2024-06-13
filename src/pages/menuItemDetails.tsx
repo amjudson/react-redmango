@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import {useGetMenuItemByIdQuery} from '../api/menuItemApi'
 import {useUpdateShoppingCartMutation} from '../api/shoppingCartApi'
-import {MainLoader, MiniLoader} from './common'
+import {MainLoader, MiniLoader} from '../components/page/common'
 
 const style = {
   height: '40px',
