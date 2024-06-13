@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
     "@stripe/react-stripe-js": "^1.16.1",
     "@stripe/stripe-js": "^1.46.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -17,7 +18,7 @@
     "jwt-decode": "^3.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-redux": "^8.0.5",
+    "react-redux": "^8.1.3",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
@@ -36,20 +37,53 @@
       "react-app/jest"
     ],
     "rules": {
-      "semi": ["warn", "never", {"beforeStatementContinuationChars": "any"}],
-      "jsx-quotes": ["warn", "prefer-single"],
-      "quotes": ["warn", "single", {"allowTemplateLiterals": true}],
-      "comma-dangle": ["warn", "always-multiline"],
-      "comma-spacing": ["warn", { "before": false, "after": true}],
-      "comma-style": ["warn", "last"],
-      "object-curly-spacing": ["warn", "never"],
-      "max-len": ["warn", {
-        "code": 115,
-        "tabWidth": 2,
-        "ignoreUrls": true,
-        "ignoreRegExpLiterals": true,
-        "ignoreTemplateLiterals": true
-      }]
+      "semi": [
+        "warn",
+        "never",
+        {
+          "beforeStatementContinuationChars": "any"
+        }
+      ],
+      "jsx-quotes": [
+        "warn",
+        "prefer-single"
+      ],
+      "quotes": [
+        "warn",
+        "single",
+        {
+          "allowTemplateLiterals": true
+        }
+      ],
+      "comma-dangle": [
+        "warn",
+        "always-multiline"
+      ],
+      "comma-spacing": [
+        "warn",
+        {
+          "before": false,
+          "after": true
+        }
+      ],
+      "comma-style": [
+        "warn",
+        "last"
+      ],
+      "object-curly-spacing": [
+        "warn",
+        "never"
+      ],
+      "max-len": [
+        "warn",
+        {
+          "code": 115,
+          "tabWidth": 2,
+          "ignoreUrls": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreTemplateLiterals": true
+        }
+      ]
     }
   },
   "browserslist": {

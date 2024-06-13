@@ -1,3 +1,5 @@
 import Home from './home'
+import NotFound from './notFound'
+import MenuItemDetails from './menuItemDetails'
 
-export {Home}
+export {Home, NotFound, MenuItemDetails}
