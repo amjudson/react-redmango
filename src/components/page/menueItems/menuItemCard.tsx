@@ -2,23 +2,13 @@ import React, {useState} from 'react'
 import {MenuItemModel} from '../../../interfaces'
 import {Link} from 'react-router-dom'
 import {useUpdateShoppingCartMutation} from '../../../api/shoppingCartApi'
+import {MiniLoader} from '../../../pages/common'
 
 const USER_ID = 'a4111e25-b17c-4b64-b583-9df853db5249'
 
 interface MenuItemCardProps {
   menuItem: MenuItemModel
 }
-
-const iconStyle= {
-  position: 'absolute',
-    top: '15px',
-    left: '15px',
-    padding: '5px 10px',
-    borderRadius: '3px',
-    outline: 'none !important',
-    cursor: 'pointer',
-}
-
 
 const MenuItemCard = (props: MenuItemCardProps) => {
   const [addingToCart, setAddingToCart] = useState(false)
@@ -32,7 +22,7 @@ const MenuItemCard = (props: MenuItemCardProps) => {
       updateQuantityBy: 1,
     })
 
-    console.log(response)
+    // console.log(response)
     setAddingToCart(false)
   }
 
@@ -55,34 +45,22 @@ const MenuItemCard = (props: MenuItemCardProps) => {
           </div>
           {props.menuItem.specialTag && props.menuItem.specialTag.length > 0 && (
             <i
-              className={'bi bi-star btn btn-success'}
-              style={{
-                position: 'absolute',
-                top: '15px',
-                right: '15px',
-                padding: '5px 10px',
-                borderRadius: '3px',
-                outline: 'none !important',
-                cursor: 'pointer',
-              }}
+              className={'bi bi-star btn btn-success menu-icon menu-icon-left'}
             >
               &nbsp; {props.menuItem.specialTag}
             </i>
           )}
 
-          <i
-            className={'bi bi-cart-plus btn btn-outline-danger'}
-            onClick={() => handleAddToCart(props.menuItem.id)}
-            style={{
-              position: 'absolute',
-              top: '15px',
-              right: '15px',
-              padding: '5px 10px',
-              borderRadius: '3px',
-              outline: 'none !important',
-              cursor: 'pointer',
-            }}
-          ></i>
+          {addingToCart ? (
+            <div className={'base-icon'}>
+              <MiniLoader/>
+            </div>
+          ) : (
+            <i
+              className={'bi bi-cart-plus btn btn-outline-danger menu-icon menu-icon-right'}
+              onClick={() => handleAddToCart(props.menuItem.id)}
+            ></i>
+          )}
 
           <div className={'text-center'}>
             <p className={'card-title m-0 text-success fs-3'}>

@@ -99,6 +99,7 @@
     ]
   },
   "devDependencies": {
-    "@types/bootstrap": "^5.2.10"
+    "@types/bootstrap": "^5.2.10",
+    "sass": "^1.77.5"
   }
 }
