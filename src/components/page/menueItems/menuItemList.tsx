@@ -1,20 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {MenuItemModel} from '../../../interfaces'
 import {MenuItemCard} from './index'
+import {useGetMenuItemsQuery} from '../../../api/menuItemApi'
+import {useDispatch} from 'react-redux'
+import {setMenuItem} from '../../../storage/redux/menuItemSlice'
+import {MainLoader} from '../../../pages/common'
 
 const MenuItemList = () => {
-  const [menuItems, setMenuItems] = useState<MenuItemModel[]>([])
+  const dispatch = useDispatch()
+  // const [menuItems, setMenuItems] = useState<MenuItemModel[]>([])
+  const {data, isLoading} = useGetMenuItemsQuery(null)
 
   useEffect(() => {
-    fetch('https://localhost:7079/api/MenuItem')
-      .then(response => response.json())
-      .then(data => setMenuItems(data.result))
-  }, [])
+    if (!isLoading) {
+      dispatch(setMenuItem(data.result))
+    }
+  }, [isLoading])
 
-  console.log(menuItems)
+  if (isLoading) {
+    return <MainLoader/>
+  }
+
   return (
     <div className={'container row'}>
-      {menuItems.length > 0 && menuItems.map((menuItem: MenuItemModel, index: number) => (
+      {data.result.length > 0 && data.result.map((menuItem: MenuItemModel, index: number) => (
         <MenuItemCard key={index} menuItem={menuItem}/>
       ))}
     </div>
