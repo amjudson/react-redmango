@@ -2,11 +2,13 @@ import {configureStore} from '@reduxjs/toolkit'
 import {menuItemSlice} from './menuItemSlice'
 import {menuItemApi, shoppingCartApi} from '../../api'
 import {shoppingCart} from './shoppingCartSlice'
+import userAuthSlice from './userAuthSlice'
 
 const store = configureStore({
   reducer: {
     shoppingCart: shoppingCart,
     menuItem: menuItemSlice,
+    userAuth: userAuthSlice,
     [menuItemApi.reducerPath]: menuItemApi.reducer,
     [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
   },

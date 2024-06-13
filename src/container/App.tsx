@@ -3,9 +3,9 @@ import {useAppDispatch} from '../storage/redux/hooks'
 import {Route, Routes} from 'react-router-dom'
 import {Footer, Header} from '../components/layout'
 import {
-  Home,
+  Home, Login,
   MenuItemDetails,
-  NotFound,
+  NotFound, Register,
   ShoppingCart,
 } from '../pages'
 import {useGetShoppingCartQuery} from '../api/shoppingCartApi'
@@ -29,6 +29,14 @@ const App = () => {
       <div className={'pb-5'}>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route
+            path='/login'
+            element={<Login/>}
+          />
+          <Route
+            path='/register'
+            element={<Register/>}
+          />
           <Route
             path='/menuItemDetails/:menuItemId'
             element={<MenuItemDetails/>}
