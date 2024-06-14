@@ -18,7 +18,6 @@ const CartSummary = () => {
   }
 
   const handleQuantity = (updateQuantityBy: number, cartItem: CartItemModel) => {
-    // console.log('BEFORE cartItem', cartItem)
     if ((updateQuantityBy === -1 && cartItem.quantity === 1) || updateQuantityBy === 0) {
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id!,
@@ -36,7 +35,6 @@ const CartSummary = () => {
       dispatch(updateQuantity({cartItem: cartItem, quantity: newQuantity}))
     }
 
-    // console.log('AFTER cartItem', cartItem)
   }
 
   return (

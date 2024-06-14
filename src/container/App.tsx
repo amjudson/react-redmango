@@ -12,6 +12,7 @@ import {
   AccessDenied,
   AuthenticationTest,
   AuthenticationTestAdmin,
+  Payment, OrderConfirmed, MyOrders, OrderDetails,
 } from '../pages'
 import {useGetShoppingCartQuery} from '../api/shoppingCartApi'
 import {setShoppingCart} from '../storage/redux/shoppingCartSlice'
@@ -44,34 +45,22 @@ const App = () => {
       <div className={'pb-5'}>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route
-            path='/login'
-            element={<Login/>}
-          />
-          <Route
-            path='/register'
-            element={<Register/>}
-          />
-          <Route
-            path='/menuItemDetails/:menuItemId'
-            element={<MenuItemDetails/>}
-          />
-          <Route
-            path='/shoppingCart'
-            element={<ShoppingCart/>}
-          />
-          <Route
-            path='/authentication'
-            element={<AuthenticationTest/>}
-          />
-          <Route
-            path='/authorization'
-            element={<AuthenticationTestAdmin/>}
-          />
-          <Route
-            path='/accessDenied'
-            element={<AccessDenied/>}
-          />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/register' element={<Register/>} />
+
+          <Route path='/menuItemDetails/:menuItemId' element={<MenuItemDetails/>} />
+
+          <Route path='/shoppingCart' element={<ShoppingCart/>} />
+          <Route path='/payment' element={<Payment/>} />
+
+          <Route path='/order/orderconfirmed/:id' element={<OrderConfirmed/>} />
+          <Route path='/order/myorders' element={<MyOrders/>} />
+          <Route path='/order/orderdetails/:id' element={<OrderDetails/>} />
+
+          <Route path='/authentication' element={<AuthenticationTest/>} />
+          <Route path='/authorization' element={<AuthenticationTestAdmin/>} />
+          <Route path='/accessDenied' element={<AccessDenied/>} />
+
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </div>

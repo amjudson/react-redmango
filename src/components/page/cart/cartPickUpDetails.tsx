@@ -5,11 +5,15 @@ import {
 } from '../../../storage/redux/hooks'
 import {inputHelper} from '../../../helper'
 import {MiniLoader} from '../common'
+import {useInitiatePaymentMutation} from '../../../api/paymentApi'
+import {useNavigate} from 'react-router-dom'
+import {ApiResponse} from '../../../interfaces'
 
 // const USER_ID = 'a4111e25-b17c-4b64-b583-9df853db5249'
 
 const CartPickUpDetails = () => {
-  // const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const [initiatePayment] = useInitiatePaymentMutation()
 
   const [loading, setLoading] = useState(false)
 
@@ -39,6 +43,19 @@ const CartPickUpDetails = () => {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    const {data}: ApiResponse = await initiatePayment(userData.id)
+    // const orderSummary = {
+    //   grandTotal,
+    //   totalItems,
+    // }
+
+    navigate('/payment', {
+      state: {
+        apiResult: data?.result,
+        userInput,
+        // orderSummary,
+      },
+    })
   }
 
   return (

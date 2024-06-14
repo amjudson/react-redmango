@@ -7,8 +7,13 @@ import Login from './login'
 import AuthenticationTestAdmin from './authenticationTestAdmin'
 import AuthenticationTest from './authenticationTest'
 import AccessDenied from './accessDenied'
+import Payment from './payment'
+import OrderConfirmed from './order/orderConfirmed'
+import MyOrders from './order/myOrders'
+import OrderDetails from './order/orderDetails'
 
 export {
+  OrderDetails,
   Home,
   NotFound,
   MenuItemDetails,
@@ -18,4 +23,7 @@ export {
   AuthenticationTestAdmin,
   AuthenticationTest,
   AccessDenied,
+  Payment,
+  OrderConfirmed,
+  MyOrders,
 }
