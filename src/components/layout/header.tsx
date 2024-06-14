@@ -46,6 +46,11 @@ const Header = () => {
                   )}
                 </NavLink>
               </li>
+              <li className={'nav-item'}>
+                <NavLink className={'nav-link'} aria-current={'page'} to={'/order/myorders'}>
+                  Orders
+                </NavLink>
+              </li>
               {/*<li className={'nav-item'}>*/}
               {/*  <NavLink className={'nav-link'} aria-current={'page'} to={'/authentication'}>*/}
               {/*    Authentication*/}

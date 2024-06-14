@@ -11,6 +11,7 @@ export interface OrderSummaryProps {
     stripePaymentIntentId?: string
     userId?: string
     clientSecret?: string
+    status?: string
   }
   userInput: {
     name: string

@@ -9,8 +9,11 @@ import AuthenticationTest from './authenticationTest'
 import AccessDenied from './accessDenied'
 import Payment from './payment'
 import OrderConfirmed from './order/orderConfirmed'
+import MyOrders from './order/myOrders'
+import OrderDetails from './order/orderDetails'
 
 export {
+  OrderDetails,
   Home,
   NotFound,
   MenuItemDetails,
@@ -22,4 +25,5 @@ export {
   AccessDenied,
   Payment,
   OrderConfirmed,
+  MyOrders,
 }

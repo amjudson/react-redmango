@@ -10,7 +10,16 @@ import {
   OrderDetailsDto,
 } from './orderDetailsModel'
 
+import {
+  OrderDetailModel,
+} from './order/orderDetailModel'
+import {
+  OrderHeaderModel,
+} from './order/orderHeaderModel'
+
 export type {
+  OrderHeaderModel,
+  OrderDetailModel,
   MenuItemModel,
   ApiResponse,
   ShoppingCartModel,
