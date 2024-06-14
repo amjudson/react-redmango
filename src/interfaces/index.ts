@@ -3,6 +3,7 @@ import ApiResponse from './apiResponse'
 import ShoppingCartModel from './shoppingCartModel'
 import CartItemModel from './cartItemModel'
 import UserModel from './userModel'
+import RegisterUserModel from './RegisterUserModel'
 
 export type {
   MenuItemModel,
@@ -10,4 +11,5 @@ export type {
   ShoppingCartModel,
   CartItemModel,
   UserModel,
+  RegisterUserModel,
 }

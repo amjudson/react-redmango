@@ -3,6 +3,7 @@ import {menuItemSlice} from './menuItemSlice'
 import {menuItemApi, shoppingCartApi} from '../../api'
 import {shoppingCart} from './shoppingCartSlice'
 import userAuthSlice from './userAuthSlice'
+import {authApi} from '../../api'
 
 const store = configureStore({
   reducer: {
@@ -11,10 +12,12 @@ const store = configureStore({
     userAuth: userAuthSlice,
     [menuItemApi.reducerPath]: menuItemApi.reducer,
     [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(menuItemApi.middleware)
+      .concat(authApi.middleware)
       .concat(shoppingCartApi.middleware),
 })
 
