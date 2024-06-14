@@ -1,6 +1,11 @@
 export default interface ApiResponse {
-  statusCode:    number;
-  success:       boolean;
-  errorMessages: string[];
-  result:        any;
+  data?: {
+    statusCode?: number
+    success?: boolean
+    errorMessages?: string[]
+    result: {
+      [key: string]: string
+    }
+  }
+  error?: any
 }

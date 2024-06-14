@@ -7,12 +7,11 @@ import {CartItemModel} from '../../../interfaces'
 import {removeFromCart, updateQuantity} from '../../../storage/redux/shoppingCartSlice'
 import {useUpdateShoppingCartMutation} from '../../../api/shoppingCartApi'
 
-const USER_ID = 'a4111e25-b17c-4b64-b583-9df853db5249'
-
 const CartSummary = () => {
   const dispatch = useAppDispatch()
   const [updateShoppingCart] = useUpdateShoppingCartMutation()
   const shoppingCartFromStore = useAppSelector((state) => state.shoppingCart ?? [])
+  const userData = useAppSelector((state) => state.userAuth)
 
   if (!shoppingCartFromStore) {
     return <div>Shopping Cart is Empty</div>
@@ -24,7 +23,7 @@ const CartSummary = () => {
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id!,
         updateQuantityBy: 0,
-        userId: USER_ID,
+        userId: userData.id,
       })
       dispatch(removeFromCart(cartItem))
     } else {
@@ -32,7 +31,7 @@ const CartSummary = () => {
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id!,
         updateQuantityBy: updateQuantityBy,
-        userId: USER_ID,
+        userId: userData.id,
       })
       dispatch(updateQuantity({cartItem: cartItem, quantity: newQuantity}))
     }

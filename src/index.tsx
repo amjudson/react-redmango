@@ -1,19 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import '../src/scss/main.scss'
-import App from '../src/container/App'
+import App from '../src/container/app'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {store} from './storage'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement)
 root.render(
   <Provider store={store}>
     <BrowserRouter>
+      <ToastContainer/>
       <App/>
     </BrowserRouter>
   </Provider>,

@@ -1,28 +1,37 @@
 import React, {useState} from 'react'
-import {MenuItemModel} from '../../../interfaces'
-import {Link} from 'react-router-dom'
+import {ApiResponse, MenuItemModel} from '../../../interfaces'
+import {Link, useNavigate} from 'react-router-dom'
 import {useUpdateShoppingCartMutation} from '../../../api/shoppingCartApi'
 import {MiniLoader} from '../common'
-
-const USER_ID = 'a4111e25-b17c-4b64-b583-9df853db5249'
+import {toastNotify} from '../../../helper'
+import {useAppSelector} from '../../../storage/redux/hooks'
 
 interface MenuItemCardProps {
   menuItem: MenuItemModel
 }
 
 const MenuItemCard = (props: MenuItemCardProps) => {
+  const navigate = useNavigate()
   const [addingToCart, setAddingToCart] = useState(false)
   const [updateShoppingCart] = useUpdateShoppingCartMutation()
+  const userData = useAppSelector((state) => state.userAuth)
 
   const handleAddToCart = async (menuItemId: number) => {
+    if (!userData.id) {
+      navigate('/login')
+      return
+    }
+
     setAddingToCart(true)
-    await updateShoppingCart({
-      userId: USER_ID,
+    const response: ApiResponse = await updateShoppingCart({
+      userId: userData.id,
       menuItemId: menuItemId,
       updateQuantityBy: 1,
     })
 
-    // console.log(response)
+    if (response.data && response.data.success) {
+      toastNotify('Item added to cart successfully')
+    }
     setAddingToCart(false)
   }
 

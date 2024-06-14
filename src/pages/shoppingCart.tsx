@@ -1,5 +1,6 @@
 import React from 'react'
 import {CartPickUpDetails, CartSummary} from '../components/page/cart'
+import {withAuth} from '../hoc'
 
 const ShoppingCart = () => {
   return (
@@ -14,4 +15,4 @@ const ShoppingCart = () => {
   )
 }
 
-export default ShoppingCart
+export default withAuth(ShoppingCart)
