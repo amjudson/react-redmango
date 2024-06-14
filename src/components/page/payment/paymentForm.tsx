@@ -8,14 +8,15 @@ import {OrderSummaryProps} from '../order/orderSummaryProps'
 import {ApiResponse, OrderDetailsDto, OrderDetailsModel} from '../../../interfaces'
 import {useCreateOrderMutation} from '../../../api/orderApi'
 import {PaymentStatus} from '../../../utility/sd'
+import {useNavigate} from 'react-router-dom'
 
 const PaymentForm = ({data, userInput}: OrderSummaryProps) => {
   const stripe = useStripe()
+  const navigate = useNavigate()
   const elements = useElements()
   const [createOrder] = useCreateOrderMutation()
   const [processing, setProcessing] = useState(false)
 
-  console.log('DATA:', data)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -33,10 +34,8 @@ const PaymentForm = ({data, userInput}: OrderSummaryProps) => {
       redirect: 'if_required',
     })
 
-    console.log(result)
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
-      console.log(result.error.message)
     } else {
       let grandTotal = 0
       let totalItems = 0
@@ -67,15 +66,26 @@ const PaymentForm = ({data, userInput}: OrderSummaryProps) => {
       }
 
       const response: ApiResponse = await createOrder(order)
-      console.log(response)
+      if (response) {
+        if (response.data?.result.status === PaymentStatus.CONFIRMED) {
+          navigate(`/order/orderconfirmed/${response.data.result.orderHeaderId}`)
+        }
+      }
     }
+
+    setProcessing(false)
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button className={'btn btn-success mt-5 w-100'}>
-        Submit
+      <button
+        className={'btn btn-success mt-5 w-100'}
+        disabled={!stripe || processing}
+      >
+        <span id={'button-text'}>
+         {processing ? 'Processing...' : 'Submit Order'}
+        </span>
       </button>
     </form>
   )

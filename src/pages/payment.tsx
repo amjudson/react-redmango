@@ -20,7 +20,6 @@ const Payment = () => {
     clientSecret: apiResult?.clientSecret,
   }
 
-  console.log(apiResult)
   return (
     <Elements stripe={stripePromise} options={options}>
       <div className={'container m-5 p-5'}>

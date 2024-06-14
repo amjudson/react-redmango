@@ -8,6 +8,7 @@ import AuthenticationTestAdmin from './authenticationTestAdmin'
 import AuthenticationTest from './authenticationTest'
 import AccessDenied from './accessDenied'
 import Payment from './payment'
+import OrderConfirmed from './order/orderConfirmed'
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   AuthenticationTest,
   AccessDenied,
   Payment,
+  OrderConfirmed,
 }
