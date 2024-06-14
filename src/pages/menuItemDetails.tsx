@@ -3,6 +3,8 @@ import {useNavigate, useParams} from 'react-router-dom'
 import {useGetMenuItemByIdQuery} from '../api/menuItemApi'
 import {useUpdateShoppingCartMutation} from '../api/shoppingCartApi'
 import {MainLoader, MiniLoader} from '../components/page/common'
+import {toastNotify} from '../helper'
+import {ApiResponse} from '../interfaces'
 
 const style = {
   height: '40px',
@@ -30,13 +32,15 @@ const MenuItemDetails = () => {
 
   const handleAddToCart = async (menuItemId: number) => {
     setAddingToCart(true)
-    const response = await updateShoppingCart({
+    const response: ApiResponse = await updateShoppingCart({
       userId: USER_ID,
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
     })
 
-    console.log(response)
+    if (response.data && response.data.success) {
+      toastNotify('Item added to cart successfully')
+    }
     setAddingToCart(false)
   }
 

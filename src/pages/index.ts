@@ -4,6 +4,9 @@ import MenuItemDetails from './menuItemDetails'
 import ShoppingCart from './shoppingCart'
 import Register from './register'
 import Login from './login'
+import AuthenticationTestAdmin from './authenticationTestAdmin'
+import AuthenticationTest from './authenticationTest'
+import AccessDenied from './accessDenied'
 
 export {
   Home,
@@ -12,4 +15,7 @@ export {
   ShoppingCart,
   Register,
   Login,
+  AuthenticationTestAdmin,
+  AuthenticationTest,
+  AccessDenied,
 }

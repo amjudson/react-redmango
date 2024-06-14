@@ -4,6 +4,7 @@ import ShoppingCartModel from './shoppingCartModel'
 import CartItemModel from './cartItemModel'
 import UserModel from './userModel'
 import RegisterUserModel from './RegisterUserModel'
+import LoginUserModel from './loginUserModel'
 
 export type {
   MenuItemModel,
@@ -12,4 +13,5 @@ export type {
   CartItemModel,
   UserModel,
   RegisterUserModel,
+  LoginUserModel,
 }

@@ -4,10 +4,13 @@ import {
   ApiResponse,
   RegisterUserModel,
 } from '../interfaces'
-import {inputHelper} from '../helper'
+import {inputHelper, toastNotify} from '../helper'
 import {useRegisterUserMutation} from '../api/authApi'
+import {useNavigate} from 'react-router-dom'
+import {MainLoader} from '../components/page/common'
 
 const Register = () => {
+  const navigate = useNavigate()
   const [registerUser] = useRegisterUserMutation()
   const [loading, setLoading] = useState(false)
   const [userInput, setUserInput] = useState<RegisterUserModel>({
@@ -34,9 +37,10 @@ const Register = () => {
     })
 
     if (response.data) {
-      console.log(response.data)
+      toastNotify('Registration successfully! Please login to continue')
+      navigate('/login')
     } else if (response.error) {
-      console.log(response.error.data.errorMessages[0])
+      toastNotify(response.error.data.errorMessages[0], 'error')
     }
 
     setLoading(false)
@@ -44,6 +48,7 @@ const Register = () => {
 
   return (
     <div className={'container text-center'}>
+      {loading && <MainLoader />}
       <form method={'post'} onSubmit={handleSubmit}>
         <h1 className={'mt-5'}>Register</h1>
         <div className={'mt-5'}>
@@ -95,7 +100,11 @@ const Register = () => {
           </div>
         </div>
         <div className={'mt-5'}>
-          <button type={'submit'} className={'btn btn-success'}>
+          <button
+            type={'submit'}
+            className={'btn btn-success'}
+            disabled={loading}
+          >
             Register
           </button>
         </div>

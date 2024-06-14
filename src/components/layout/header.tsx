@@ -1,11 +1,21 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import {useAppSelector} from '../../storage/redux/hooks'
+import {NavLink, useNavigate} from 'react-router-dom'
+import {useAppSelector, useAppDispatch} from '../../storage/redux/hooks'
+import {emptyUserState, setLoggedInUser} from '../../storage/redux/userAuthSlice'
 
 let logo = require('../../../src/assets/images/mango.png')
 
 const Header = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const shoppingCartFromStore = useAppSelector((state) => state.shoppingCart ?? [])
+  const userData = useAppSelector((state) => state.userAuth ?? {})
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    dispatch(setLoggedInUser({...emptyUserState}))
+    navigate('/')
+  }
 
   return (
     <div>
@@ -36,6 +46,16 @@ const Header = () => {
                   ) : null}
                 </NavLink>
               </li>
+              <li className={'nav-item'}>
+                <NavLink className={'nav-link'} aria-current={'page'} to={'/authentication'}>
+                  Authentication
+                </NavLink>
+              </li>
+              <li className={'nav-item'}>
+                <NavLink className={'nav-link'} aria-current={'page'} to={'/authorization'}>
+                  Authorization
+                </NavLink>
+              </li>
               <li className={'nav-item dropdown'}>
                 <a className={'nav-link dropdown-toggle'} href={'/'} role={'button'} data-bs-toggle={'dropdown'}
                    aria-expanded={'false'}>
@@ -48,29 +68,51 @@ const Header = () => {
                 </ul>
               </li>
               <div className={'d-flex'} style={{marginLeft: 'auto'}}>
-                <li>
-                  <button
-                    className={'btn btn-success btn-outlined rounded-pill text-white mx-2 logout'}
-                  >
-                    Logout
-                  </button>
-                </li>
-                <li>
-                  <NavLink
-                    className={'nav-link'}
-                    to={'/register'}
-                  >
-                    Register
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className={'btn btn-success btn-outlined rounded-pill text-white mx-2 logout'}
-                    to={'/login'}
-                  >
-                    Login
-                  </NavLink>
-                </li>
+                {userData.id && (
+                  <>
+                    <li className={'nav-item'}>
+                      <button
+                        className={'btn btn-success btn-outlined rounded-pill text-white mx-2'}
+                        style={{
+                          cursor: 'pointer',
+                          backgroundColor: 'transparent',
+                          border: 0,
+                        }}
+                      >
+                        Welcome, {userData.fullName}
+                      </button>
+
+                    </li>
+                    <li>
+                      <button
+                        className={'btn btn-success btn-outlined rounded-pill text-white mx-2 logout'}
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </>
+                )}
+                {!userData.id && (
+                  <>
+                    <li>
+                      <NavLink
+                        className={'nav-link'}
+                        to={'/register'}
+                      >
+                        Register
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={'btn btn-success btn-outlined rounded-pill text-white mx-2 logout'}
+                        to={'/login'}
+                      >
+                        Login
+                      </NavLink>
+                    </li>
+                  </>
+                )}
               </div>
             </ul>
           </div>

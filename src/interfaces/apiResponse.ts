@@ -3,7 +3,7 @@ export default interface ApiResponse {
     statusCode?: number
     success?: boolean
     errorMessages?: string[]
-    result?: {
+    result: {
       [key: string]: string
     }
   }
