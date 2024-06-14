@@ -5,13 +5,12 @@ import {useUpdateShoppingCartMutation} from '../api/shoppingCartApi'
 import {MainLoader, MiniLoader} from '../components/page/common'
 import {toastNotify} from '../helper'
 import {ApiResponse} from '../interfaces'
+import {useAppSelector} from '../storage/redux/hooks'
 
 const style = {
   height: '40px',
   fontSize: '20px',
 }
-
-const USER_ID = 'a4111e25-b17c-4b64-b583-9df853db5249'
 
 const MenuItemDetails = () => {
   const {menuItemId} = useParams()
@@ -20,6 +19,7 @@ const MenuItemDetails = () => {
   const [quantity, setQuantity] = useState(1)
   const [addingToCart, setAddingToCart] = useState(false)
   const [updateShoppingCart] = useUpdateShoppingCartMutation()
+  const userData = useAppSelector((state) => state.userAuth)
 
   const handleQuantity = (value: number) => {
     let newQuantity = quantity + value
@@ -31,9 +31,14 @@ const MenuItemDetails = () => {
   }
 
   const handleAddToCart = async (menuItemId: number) => {
+    if (!userData.id) {
+      navigate('/login')
+      return
+    }
+
     setAddingToCart(true)
     const response: ApiResponse = await updateShoppingCart({
-      userId: USER_ID,
+      userId: userData.id,
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
     })

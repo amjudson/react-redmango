@@ -1,4 +1,5 @@
 import React from 'react'
+import {withAdminAuth} from '../hoc'
 
 const AuthenticationTestAdmin = () => {
   return (
@@ -8,4 +9,4 @@ const AuthenticationTestAdmin = () => {
   )
 }
 
-export default AuthenticationTestAdmin
+export default withAdminAuth(AuthenticationTestAdmin)

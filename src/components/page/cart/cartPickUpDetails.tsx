@@ -10,16 +10,17 @@ import {MiniLoader} from '../common'
 
 const CartPickUpDetails = () => {
   // const dispatch = useAppDispatch()
-  const initialUserData = {
-    name: '',
-    email: '',
-    phoneNumber: '',
-  }
 
-  const [userInput, setUserInput] = useState(initialUserData)
   const [loading, setLoading] = useState(false)
 
   const shoppingCartFromStore = useAppSelector((state) => state.shoppingCart ?? [])
+  const userData = useAppSelector((state) => state.userAuth ?? {})
+  const initialUserData = {
+    name: userData.fullName ?? '',
+    email: userData.email ?? '',
+    phoneNumber: '',
+  }
+  const [userInput, setUserInput] = useState(initialUserData)
 
   let grandTotal = 0
   let totalItems = 0

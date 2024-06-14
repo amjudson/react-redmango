@@ -41,21 +41,21 @@ const Header = () => {
               <li className={'nav-item'}>
                 <NavLink className={'nav-link'} aria-current={'page'} to={'/shoppingCart'}>
                   <i className={'bi bi-cart4'}></i>
-                  {shoppingCartFromStore.cartItems?.length ? (
-                    <span className={'badge bg-success ms-1'}>{`${shoppingCartFromStore.cartItems.length}`}</span>
-                  ) : null}
+                  {userData.id && (
+                    <span className={'badge bg-success ms-1'}>{`${shoppingCartFromStore.cartItems?.length ?? 0}`}</span>
+                  )}
                 </NavLink>
               </li>
-              <li className={'nav-item'}>
-                <NavLink className={'nav-link'} aria-current={'page'} to={'/authentication'}>
-                  Authentication
-                </NavLink>
-              </li>
-              <li className={'nav-item'}>
-                <NavLink className={'nav-link'} aria-current={'page'} to={'/authorization'}>
-                  Authorization
-                </NavLink>
-              </li>
+              {/*<li className={'nav-item'}>*/}
+              {/*  <NavLink className={'nav-link'} aria-current={'page'} to={'/authentication'}>*/}
+              {/*    Authentication*/}
+              {/*  </NavLink>*/}
+              {/*</li>*/}
+              {/*<li className={'nav-item'}>*/}
+              {/*  <NavLink className={'nav-link'} aria-current={'page'} to={'/authorization'}>*/}
+              {/*    Authorization*/}
+              {/*  </NavLink>*/}
+              {/*</li>*/}
               <li className={'nav-item dropdown'}>
                 <a className={'nav-link dropdown-toggle'} href={'/'} role={'button'} data-bs-toggle={'dropdown'}
                    aria-expanded={'false'}>
