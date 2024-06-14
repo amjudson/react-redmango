@@ -4,12 +4,18 @@ import {
   PaymentElement,
 } from '@stripe/react-stripe-js'
 import React, {useState} from 'react'
+import {OrderSummaryProps} from '../order/orderSummaryProps'
+import {ApiResponse, OrderDetailsDto, OrderDetailsModel} from '../../../interfaces'
+import {useCreateOrderMutation} from '../../../api/orderApi'
+import {PaymentStatus} from '../../../utility/sd'
 
-const PaymentForm = () => {
+const PaymentForm = ({data, userInput}: OrderSummaryProps) => {
   const stripe = useStripe()
   const elements = useElements()
+  const [createOrder] = useCreateOrderMutation()
   const [processing, setProcessing] = useState(false)
 
+  console.log('DATA:', data)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -32,9 +38,36 @@ const PaymentForm = () => {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message)
     } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
+      let grandTotal = 0
+      let totalItems = 0
+      const orderDetailsDto: OrderDetailsDto[] = []
+      data.cartItems.forEach((cartItem) => {
+        orderDetailsDto.push({
+          menuItemId: cartItem.menuItem?.id ?? 0,
+          quantity: cartItem.quantity ?? 0,
+          itemName: cartItem.menuItem?.name ?? '',
+          price: cartItem.menuItem?.price ?? 0,
+        })
+        grandTotal += (cartItem.menuItem?.price ?? 0) * (cartItem.quantity ?? 0)
+        totalItems += cartItem.quantity ?? 0
+      })
+
+      const order: OrderDetailsModel = {
+        orderDetailsDtos: orderDetailsDto,
+        totalItems: totalItems,
+        orderTotal: grandTotal,
+        pickupName: userInput.name,
+        pickupEmail: userInput.email,
+        pickupPhoneNumber: userInput.phoneNumber,
+        stripePaymentIntentID: data.stripePaymentIntentId ?? '',
+        applicationUserId: data.userId ?? '',
+        status: result.paymentIntent.status === 'succeeded'
+          ? PaymentStatus.CONFIRMED
+          : PaymentStatus.PENDING,
+      }
+
+      const response: ApiResponse = await createOrder(order)
+      console.log(response)
     }
   }
 

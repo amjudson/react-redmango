@@ -8,6 +8,9 @@ export interface OrderSummaryProps {
     id: number
     cartItems: CartItemModel[]
     cartTotal: number
+    stripePaymentIntentId?: string
+    userId?: string
+    clientSecret?: string
   }
   userInput: {
     name: string

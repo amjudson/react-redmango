@@ -5,6 +5,7 @@ import {
   shoppingCartApi,
   authApi,
   paymentApi,
+  orderApi,
 } from '../../api'
 import {shoppingCart} from './shoppingCartSlice'
 import userAuthSlice from './userAuthSlice'
@@ -18,12 +19,14 @@ const store = configureStore({
     [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(menuItemApi.middleware)
       .concat(authApi.middleware)
       .concat(paymentApi.middleware)
+      .concat(orderApi.middleware)
       .concat(shoppingCartApi.middleware),
 })
 

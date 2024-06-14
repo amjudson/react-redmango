@@ -5,6 +5,10 @@ import CartItemModel from './cartItemModel'
 import UserModel from './userModel'
 import RegisterUserModel from './RegisterUserModel'
 import LoginUserModel from './loginUserModel'
+import {
+  OrderDetailsModel,
+  OrderDetailsDto,
+} from './orderDetailsModel'
 
 export type {
   MenuItemModel,
@@ -14,4 +18,6 @@ export type {
   UserModel,
   RegisterUserModel,
   LoginUserModel,
+  OrderDetailsModel,
+  OrderDetailsDto,
 }
