@@ -12,6 +12,7 @@ import {
   AccessDenied,
   AuthenticationTest,
   AuthenticationTestAdmin,
+  Payment,
 } from '../pages'
 import {useGetShoppingCartQuery} from '../api/shoppingCartApi'
 import {setShoppingCart} from '../storage/redux/shoppingCartSlice'
@@ -59,6 +60,10 @@ const App = () => {
           <Route
             path='/shoppingCart'
             element={<ShoppingCart/>}
+          />
+          <Route
+            path='/payment'
+            element={<Payment/>}
           />
           <Route
             path='/authentication'
