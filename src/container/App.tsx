@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useAppDispatch} from '../storage/redux/hooks'
+import {useAppDispatch, useAppSelector} from '../storage/redux/hooks'
 import {Route, Routes} from 'react-router-dom'
 import {Footer, Header} from '../components/layout'
 import {
@@ -19,11 +19,10 @@ import {UserModel} from '../interfaces'
 import jwt_decode from 'jwt-decode'
 import {setLoggedInUser} from '../storage/redux/userAuthSlice'
 
-const USER_ID = 'a4111e25-b17c-4b64-b583-9df853db5249'
-
 const App = () => {
   const dispatch = useAppDispatch()
-  const {data, isLoading} = useGetShoppingCartQuery(USER_ID)
+  const userData = useAppSelector((state) => state.userAuth)
+  const {data, isLoading} = useGetShoppingCartQuery(userData.id)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -37,7 +36,7 @@ const App = () => {
     if (!isLoading) {
       dispatch(setShoppingCart(data.result?.cartItems))
     }
-  }, [isLoading, data, dispatch])
+  }, [data])
 
   return (
     <div>
