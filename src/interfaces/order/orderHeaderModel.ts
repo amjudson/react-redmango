@@ -1,4 +1,5 @@
 import {OrderDetailModel} from './orderDetailModel'
+import {PaymentStatus} from '../../utility/sd'
 
 export interface OrderHeaderModel {
   orderHeaderId?:         number;
@@ -10,7 +11,7 @@ export interface OrderHeaderModel {
   orderTotal?:            number;
   orderDate?:             Date;
   stripePaymentIntentID?: string;
-  status?:                string;
+  status?:                PaymentStatus;
   totalItems?:            number;
   orderDetails?:          OrderDetailModel[];
 }

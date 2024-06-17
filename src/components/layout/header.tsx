@@ -2,6 +2,7 @@ import React from 'react'
 import {NavLink, useNavigate} from 'react-router-dom'
 import {useAppSelector, useAppDispatch} from '../../storage/redux/hooks'
 import {emptyUserState, setLoggedInUser} from '../../storage/redux/userAuthSlice'
+import {Roles} from '../../utility/sd'
 
 let logo = require('../../../src/assets/images/mango.png')
 
@@ -38,6 +39,35 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
+              {userData.role === Roles.ADMIN ? (
+                <li className={'nav-item dropdown'}>
+                  <a className={'nav-link dropdown-toggle'} href={'/'} role={'button'} data-bs-toggle={'dropdown'}
+                     aria-expanded={'false'}>
+                    Admin Panel
+                  </a>
+                  <ul className={'dropdown-menu'}>
+                    <li
+                      className={'dropdown-item drop-down-pointer'}
+                      onClick={() => navigate('/order/myorders')}
+                    >
+                      My Orders
+                    </li>
+                    <li
+                      className={'dropdown-item drop-down-pointer'}
+                      onClick={() => navigate('/order/allorders')}
+                    >
+                      All Orders
+                    </li>
+                  </ul>
+                </li>
+                )
+                : (
+                  <li className={'nav-item'}>
+                    <NavLink className={'nav-link'} aria-current={'page'} to={'/order/myorders'}>
+                      Orders
+                    </NavLink>
+                </li>
+              )}
               <li className={'nav-item'}>
                 <NavLink className={'nav-link'} aria-current={'page'} to={'/shoppingCart'}>
                   <i className={'bi bi-cart4'}></i>
@@ -45,32 +75,6 @@ const Header = () => {
                     <span className={'badge bg-success ms-1'}>{`${shoppingCartFromStore.cartItems?.length ?? 0}`}</span>
                   )}
                 </NavLink>
-              </li>
-              <li className={'nav-item'}>
-                <NavLink className={'nav-link'} aria-current={'page'} to={'/order/myorders'}>
-                  Orders
-                </NavLink>
-              </li>
-              {/*<li className={'nav-item'}>*/}
-              {/*  <NavLink className={'nav-link'} aria-current={'page'} to={'/authentication'}>*/}
-              {/*    Authentication*/}
-              {/*  </NavLink>*/}
-              {/*</li>*/}
-              {/*<li className={'nav-item'}>*/}
-              {/*  <NavLink className={'nav-link'} aria-current={'page'} to={'/authorization'}>*/}
-              {/*    Authorization*/}
-              {/*  </NavLink>*/}
-              {/*</li>*/}
-              <li className={'nav-item dropdown'}>
-                <a className={'nav-link dropdown-toggle'} href={'/'} role={'button'} data-bs-toggle={'dropdown'}
-                   aria-expanded={'false'}>
-                  Admin Panel
-                </a>
-                <ul className={'dropdown-menu'}>
-                  <li><a className={'dropdown-item'} href={'/'}>Action</a></li>
-                  <li><a className={'dropdown-item'} href={'/'}>Another action</a></li>
-                  <li><a className={'dropdown-item'} href={'/'}>Something else here</a></li>
-                </ul>
               </li>
               <div className={'d-flex'} style={{marginLeft: 'auto'}}>
                 {userData.id && (

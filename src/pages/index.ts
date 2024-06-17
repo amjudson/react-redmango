@@ -11,8 +11,10 @@ import Payment from './payment'
 import OrderConfirmed from './order/orderConfirmed'
 import MyOrders from './order/myOrders'
 import OrderDetails from './order/orderDetails'
+import AllOrders from './order/allOrders'
 
 export {
+  AllOrders,
   OrderDetails,
   Home,
   NotFound,
