@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from '../storage/redux/hooks'
 import {Route, Routes} from 'react-router-dom'
 import {Footer, Header} from '../components/layout'
@@ -25,8 +25,13 @@ import {setLoggedInUser} from '../storage/redux/userAuthSlice'
 
 const App = () => {
   const dispatch = useAppDispatch()
+  const [skip, setSkip] = useState(true)
+
   const userData = useAppSelector((state) => state.userAuth)
-  const {data, isLoading} = useGetShoppingCartQuery(userData.id)
+  const {data, isLoading} = useGetShoppingCartQuery(userData.id,
+    {
+      skip: skip,
+    })
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -37,10 +42,16 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && data) {
       dispatch(setShoppingCart(data.result?.cartItems))
     }
   }, [data])
+
+  useEffect(() => {
+    if (userData.id) {
+      setSkip(false)
+    }
+  }, [userData])
 
   return (
     <div>
