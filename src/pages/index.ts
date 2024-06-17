@@ -11,8 +11,14 @@ import Payment from './payment'
 import OrderConfirmed from './order/orderConfirmed'
 import MyOrders from './order/myOrders'
 import OrderDetails from './order/orderDetails'
+import AllOrders from './order/allOrders'
+import MenuItemList from './menuItem/menuItemList'
+import MenuItemUpsert from './menuItem/menuItemUpsert'
 
 export {
+  MenuItemList,
+  MenuItemUpsert,
+  AllOrders,
   OrderDetails,
   Home,
   NotFound,

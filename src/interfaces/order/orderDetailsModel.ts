@@ -1,3 +1,5 @@
+import {OrderStatus} from '../../utility/sd'
+
 export interface OrderDetailsModel {
   pickupName:            string;
   pickupPhoneNumber:     string;
@@ -5,9 +7,9 @@ export interface OrderDetailsModel {
   applicationUserId:     string;
   orderTotal:            number;
   stripePaymentIntentID: string;
-  status:                string;
+  status:                OrderStatus;
   totalItems:            number;
-  orderDetailsDtos:          OrderDetailsDto[];
+  orderDetailsDtos:      OrderDetailsDto[];
 }
 
 export interface OrderDetailsDto {

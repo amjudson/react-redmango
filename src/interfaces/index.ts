@@ -8,7 +8,7 @@ import LoginUserModel from './loginUserModel'
 import {
   OrderDetailsModel,
   OrderDetailsDto,
-} from './orderDetailsModel'
+} from './order/orderDetailsModel'
 
 import {
   OrderDetailModel,

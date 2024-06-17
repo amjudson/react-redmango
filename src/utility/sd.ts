@@ -3,7 +3,7 @@ export enum Roles {
   CUSTOMER = 'customer',
 }
 
-export enum PaymentStatus {
+export enum OrderStatus {
   PENDING = 'Pending',
   CONFIRMED = 'Confirmed',
   BEING_COOKED = 'Being Cooked',

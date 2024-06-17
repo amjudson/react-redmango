@@ -7,7 +7,7 @@ import React, {useState} from 'react'
 import {OrderSummaryProps} from '../order/orderSummaryProps'
 import {ApiResponse, OrderDetailsDto, OrderDetailsModel} from '../../../interfaces'
 import {useCreateOrderMutation} from '../../../api/orderApi'
-import {PaymentStatus} from '../../../utility/sd'
+import {OrderStatus} from '../../../utility/sd'
 import {useNavigate} from 'react-router-dom'
 
 const PaymentForm = ({data, userInput}: OrderSummaryProps) => {
@@ -61,13 +61,13 @@ const PaymentForm = ({data, userInput}: OrderSummaryProps) => {
         stripePaymentIntentID: data.stripePaymentIntentId ?? '',
         applicationUserId: data.userId ?? '',
         status: result.paymentIntent.status === 'succeeded'
-          ? PaymentStatus.CONFIRMED
-          : PaymentStatus.PENDING,
+          ? OrderStatus.CONFIRMED
+          : OrderStatus.PENDING,
       }
 
       const response: ApiResponse = await createOrder(order)
       if (response) {
-        if (response.data?.result.status === PaymentStatus.CONFIRMED) {
+        if (response.data?.result.status === OrderStatus.CONFIRMED) {
           navigate(`/order/orderconfirmed/${response.data.result.orderHeaderId}`)
         }
       }
