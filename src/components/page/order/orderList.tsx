@@ -37,7 +37,7 @@ const OrderList = ({orderData, isLoading}: OrderListProps) => {
                   <div className={'col-1'}>{orderItem.totalItems}</div>
                   <div className={'col-2'}>{new Date(orderItem.orderDate!).toLocaleDateString()}</div>
                   <div className={'col-2'}>
-                    {orderItem.status}
+                    <span className={`badge bg-${badgeColor}`}>{orderItem.status}</span>
                   </div>
                   <div className={'col-1'}>
                     <button

@@ -1,18 +1,18 @@
-import {PaymentStatus} from '../utility/sd'
+import {OrderStatus} from '../utility/sd'
 
-const getStatusColor = (status: PaymentStatus) => {
+const getStatusColor = (status: OrderStatus) => {
   switch (status) {
-    case PaymentStatus.CONFIRMED:
+    case OrderStatus.CONFIRMED:
       return 'primary'
-    case PaymentStatus.PENDING:
+    case OrderStatus.PENDING:
       return 'secondary'
-    case PaymentStatus.CANCELLED:
+    case OrderStatus.CANCELLED:
       return 'danger'
-    case PaymentStatus.COMPLETED:
+    case OrderStatus.COMPLETED:
       return 'success'
-    case PaymentStatus.BEING_COOKED:
+    case OrderStatus.BEING_COOKED:
       return 'info'
-    case PaymentStatus.READY_FOR_PICKUP:
+    case OrderStatus.READY_FOR_PICKUP:
       return 'warning'
     default:
       return 'warning'

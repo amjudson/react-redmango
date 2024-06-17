@@ -48,6 +48,12 @@ const Header = () => {
                   <ul className={'dropdown-menu'}>
                     <li
                       className={'dropdown-item drop-down-pointer'}
+                      onClick={() => navigate('/menuitem/menuitemlist')}
+                    >
+                      Menu Item List
+                    </li>
+                    <li
+                      className={'dropdown-item drop-down-pointer'}
                       onClick={() => navigate('/order/myorders')}
                     >
                       My Orders

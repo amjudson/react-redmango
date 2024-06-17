@@ -2,7 +2,7 @@ import {
   CartItemModel,
   // ShoppingCartModel,
 } from '../../../interfaces'
-import {PaymentStatus} from '../../../utility/sd'
+import {OrderStatus} from '../../../utility/sd'
 
 export interface OrderSummaryProps {
   data: {
@@ -12,7 +12,7 @@ export interface OrderSummaryProps {
     stripePaymentIntentId?: string
     userId?: string
     clientSecret?: string
-    status?: PaymentStatus
+    status?: OrderStatus
   }
   userInput: {
     name: string

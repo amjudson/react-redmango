@@ -1,4 +1,4 @@
-import {PaymentStatus} from '../../utility/sd'
+import {OrderStatus} from '../../utility/sd'
 
 export interface OrderDetailsModel {
   pickupName:            string;
@@ -7,7 +7,7 @@ export interface OrderDetailsModel {
   applicationUserId:     string;
   orderTotal:            number;
   stripePaymentIntentID: string;
-  status:                PaymentStatus;
+  status:                OrderStatus;
   totalItems:            number;
   orderDetailsDtos:      OrderDetailsDto[];
 }

@@ -15,7 +15,7 @@ import {
   Payment,
   OrderConfirmed,
   MyOrders,
-  OrderDetails, AllOrders,
+  OrderDetails, AllOrders, MenuItemList, MenuItemUpsert,
 } from '../pages'
 import {useGetShoppingCartQuery} from '../api/shoppingCartApi'
 import {setShoppingCart} from '../storage/redux/shoppingCartSlice'
@@ -60,6 +60,10 @@ const App = () => {
           <Route path='/order/myorders' element={<MyOrders/>} />
           <Route path='/order/allorders' element={<AllOrders/>} />
           <Route path='/order/orderdetails/:id' element={<OrderDetails/>} />
+
+          <Route path='/menuItem/menuitemlist' element={<MenuItemList/>} />
+          <Route path='/menuItem/menuitemupsert/:id' element={<MenuItemUpsert/>} />
+          <Route path='/menuItem/menuitemupsert' element={<MenuItemUpsert/>} />
 
           <Route path='/authentication' element={<AuthenticationTest/>} />
           <Route path='/authorization' element={<AuthenticationTestAdmin/>} />
