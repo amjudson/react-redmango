@@ -3,7 +3,6 @@ import {useDeleteMenuItemMutation, useGetMenuItemsQuery} from '../../api/menuIte
 import {MenuItemModel} from '../../interfaces'
 import {MainLoader} from '../../components/page/common'
 import {useNavigate} from 'react-router-dom'
-import {toastNotify} from '../../helper'
 import {toast} from 'react-toastify'
 
 const MenuItemList = () => {
@@ -12,7 +11,7 @@ const MenuItemList = () => {
   const {data, isLoading} = useGetMenuItemsQuery(null)
 
   const handleMenuItemDelete = async (id: number) => {
-    toast.promise(
+    await toast.promise(
       deleteMenuItem(id),
       {
         pending: 'Processing your request 🕐',

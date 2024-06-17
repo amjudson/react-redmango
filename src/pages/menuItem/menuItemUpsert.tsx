@@ -161,7 +161,7 @@ const MenuItemUpsert = () => {
               name={'category'}
               onChange={handleMenuitemInput}
             >
-              {Categories.map((category, index) => (
+              {Categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
@@ -191,12 +191,12 @@ const MenuItemUpsert = () => {
                 </button>
               </div>
               <div className={'col-6'}>
-                <a
+                <button
                   className={'btn btn-secondary form-control mt-3'}
                   onClick={() => navigate('/menuItem/menuitemlist')}
                 >
                   Back to Menu Items
-                </a>
+                </button>
               </div>
             </div>
             <div className={'text-center'}>
