@@ -11,3 +11,10 @@ export enum OrderStatus {
   COMPLETED = 'Completed',
   CANCELLED = 'Cancelled',
 }
+
+export enum Category {
+  APPETIZER = 'Appetizer',
+  ENTREE = 'Entrée',
+  DESSERT = 'Dessert',
+  BEVERAGES = 'Beverages',
+}
