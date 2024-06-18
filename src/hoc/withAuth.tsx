@@ -9,4 +9,4 @@ const withAuth = (WrappedComponent: any) => {
   }
 }
 
-export default withAuth;
+export default withAuth

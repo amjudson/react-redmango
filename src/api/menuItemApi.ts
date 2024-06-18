@@ -4,6 +4,10 @@ const menuItemApi = createApi({
   reducerPath: 'menuItemApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://localhost:7079/api/',
+    prepareHeaders: (headers: Headers) => {
+      const token = localStorage.getItem('token')
+      token && (headers.append('Authorization', `Bearer ${token}`))
+    },
   }),
   tagTypes: ['MenuItems'],
   endpoints: (builder) => ({
@@ -19,8 +23,37 @@ const menuItemApi = createApi({
       }),
       providesTags: ['MenuItems'],
     }),
+    createMenuItem: builder.mutation({
+      query: (data) => ({
+        url: `menuItem`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['MenuItems'],
+    }),
+    updateMenuItem: builder.mutation({
+      query: ({data, id}) => ({
+        url: `menuItem/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['MenuItems'],
+    }),
+    deleteMenuItem: builder.mutation({
+      query: (id) => ({
+        url: `menuItem/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['MenuItems'],
+    }),
   }),
 })
 
-export const {useGetMenuItemsQuery, useGetMenuItemByIdQuery} = menuItemApi
+export const {
+  useGetMenuItemsQuery,
+  useGetMenuItemByIdQuery,
+  useCreateMenuItemMutation,
+  useUpdateMenuItemMutation,
+  useDeleteMenuItemMutation,
+} = menuItemApi
 export default menuItemApi

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   // useAppDispatch,
   useAppSelector,
@@ -40,20 +40,24 @@ const CartPickUpDetails = () => {
     setUserInput(tempData)
   }
 
+  useEffect(() => {
+    setUserInput({
+        name: userData.fullName ?? '',
+        email: userData.email ?? '',
+        phoneNumber: '',
+      },
+    )
+  }, [userData])
+
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     const {data}: ApiResponse = await initiatePayment(userData.id)
-    // const orderSummary = {
-    //   grandTotal,
-    //   totalItems,
-    // }
 
     navigate('/payment', {
       state: {
         apiResult: data?.result,
         userInput,
-        // orderSummary,
       },
     })
   }

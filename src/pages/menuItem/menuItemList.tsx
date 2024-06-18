@@ -1,12 +1,28 @@
 import React from 'react'
-import {useGetMenuItemsQuery} from '../../api/menuItemApi'
+import {useDeleteMenuItemMutation, useGetMenuItemsQuery} from '../../api/menuItemApi'
 import {MenuItemModel} from '../../interfaces'
 import {MainLoader} from '../../components/page/common'
 import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-toastify'
 
 const MenuItemList = () => {
   const navigate = useNavigate()
+  const [deleteMenuItem] = useDeleteMenuItemMutation()
   const {data, isLoading} = useGetMenuItemsQuery(null)
+
+  const handleMenuItemDelete = async (id: number) => {
+    await toast.promise(
+      deleteMenuItem(id),
+      {
+        pending: 'Processing your request 🕐',
+        success: 'Menu Item Deleted Successfully 👌',
+        error: 'Error encountered 🤯',
+      },
+      {
+        theme: 'dark',
+      },
+    )
+  }
 
   return (
     <>
@@ -19,7 +35,7 @@ const MenuItemList = () => {
               className={'btn btn-success'}
               onClick={() => navigate(`/menuitem/menuitemupsert`)}
             >
-              Add New
+              Add New Menu Item
             </button>
           </div>
           <div className={'p-2'}>
@@ -53,7 +69,10 @@ const MenuItemList = () => {
                       onClick={() => navigate(`/menuitem/menuitemupsert/${item.id}`)}
                     ></i>
                   </button>
-                  <button className={'btn btn-danger mx-2'}>
+                  <button
+                    className={'btn btn-danger mx-2'}
+                    onClick={() => handleMenuItemDelete(item.id)}
+                  >
                     <i className={'bi bi-trash-fill'}></i>
                   </button>
                 </div>
