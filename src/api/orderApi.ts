@@ -12,12 +12,22 @@ const orderApi = createApi({
   tagTypes: ['Orders'],
   endpoints: (builder) => ({
     getAllOrders: builder.query({
-      query: (userId) => ({
+      query: ({userId, searchString, status, pageSize, pageNumber}) => ({
         url: `order`,
         params: {
-          userId,
+          ...(userId && {userId}),
+          ...(searchString && {searchString}),
+          ...(status && {status}),
+          ...(pageSize && {pageSize}),
+          ...(pageNumber && {pageNumber}),
         },
       }),
+      transformResponse(apiResponse: {result: any}, meta:any) {
+        return {
+          apiResponse,
+          totalRecords: meta.response.headers.get('X-Pagination'),
+        }
+      },
       providesTags: ['Orders'],
     }),
     getOrderDetails: builder.query({
